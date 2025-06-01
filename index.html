@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +6,9 @@
     <title>Python Data Visualization</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -192,6 +195,13 @@
         .code-comment { color: #6a9955; } /* comments */
         .code-class { color: #4ec9b0; } /* class names */
         .code-operator { color: #d4d4d4; } /* operators like +, = */
+        .code-block,
+        .code-block code,
+        pre[class*="language-"],
+        code[class*="language-"] {
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -331,7 +341,12 @@
                         <div class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">Demo các loại biểu đồ cơ bản với Iris Dataset</h4>
                             <p class="text-sm text-gray-500 italic mb-2">(Mở Google Colab, tải Iris dataset từ Seaborn)</p>
-                            <pre class="code-block"><code>import matplotlib.pyplot as plt
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-1">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-1" class="language-python">import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
@@ -340,10 +355,16 @@ import numpy as np
 iris_df = sns.load_dataset('iris')
 print(iris_df.head())
 print(iris_df['species'].value_counts())</code></pre>
+                            </div>
                             
                             <h5 class="font-semibold mt-4 mb-1">1. Line Chart (Biểu đồ đường)</h5>
                             <p><strong>Trường hợp sử dụng:</strong> Theo dõi xu hướng, sự thay đổi của dữ liệu theo thời gian.</p>
-                            <pre class="code-block"><code># Ví dụ Line Chart đơn giản
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-2">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-2" class="language-python"># Ví dụ Line Chart đơn giản
 thang = np.arange(1, 7)
 doanh_so_A = np.array([10, 12, 15, 14, 17, 20])
 plt.figure(figsize=(8, 5))
@@ -354,58 +375,89 @@ plt.ylabel('Doanh số')
 plt.legend()
 plt.grid(True)
 plt.show()</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1 mb-4">Tham số chính: <br><strong>plt.plot(...)</strong>: x, y, marker, label, color, linestyle, linewidth.<br><strong>plt.title</strong>, <strong>plt.xlabel</strong>, <strong>plt.ylabel</strong>, <strong>plt.legend</strong>, <strong>plt.grid</strong>.</p>
 
                             <h5 class="font-semibold mt-4 mb-1">2. Bar Chart (Biểu đồ cột)</h5>
                             <p><strong>Trường hợp sử dụng:</strong> So sánh giá trị giữa các nhóm.</p>
-                            <pre class="code-block"><code>plt.figure(figsize=(7, 5))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-3">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-3" class="language-python">plt.figure(figsize=(7, 5))
 sns.countplot(x='species', data=iris_df, palette='husl')
 plt.title('Số lượng mẫu theo Loài hoa Iris')
 plt.xlabel('Loài hoa')
 plt.ylabel('Số lượng')
 plt.show()</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1 mb-4">Tham số chính: <br><strong>sns.countplot(...)</strong>: x, data, palette, hue.<br><strong>plt.title</strong>, <strong>plt.xlabel</strong>, <strong>plt.ylabel</strong>.</p>
 
                             <h5 class="font-semibold mt-4 mb-1">3. Scatter Plot (Biểu đồ phân tán)</h5>
                             <p><strong>Trường hợp sử dụng:</strong> Khám phá mối quan hệ giữa hai biến số.</p>
-                            <pre class="code-block"><code>plt.figure(figsize=(8, 6))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-4">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-4" class="language-python">plt.figure(figsize=(8, 6))
 sns.scatterplot(x='petal_length', y='petal_width', hue='species', data=iris_df, s=70)
 plt.title('Mối quan hệ Chiều dài và Chiều rộng Cánh hoa')
 plt.xlabel('Chiều dài Cánh hoa (cm)')
 plt.ylabel('Chiều rộng Cánh hoa (cm)')
 plt.grid(True)
 plt.show()</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1 mb-4">Tham số chính: <br><strong>sns.scatterplot(...)</strong>: x, y, hue, data, s, style.<br><strong>plt.title</strong>, <strong>plt.xlabel</strong>, <strong>plt.ylabel</strong>, <strong>plt.grid</strong>.</p>
 
                             <h5 class="font-semibold mt-4 mb-1">4. Histogram (Biểu đồ tần suất)</h5>
                             <p><strong>Trường hợp sử dụng:</strong> Hiểu phân phối của một biến.</p>
-                            <pre class="code-block"><code>plt.figure(figsize=(10, 6))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-5">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-5" class="language-python">plt.figure(figsize=(10, 6))
 sns.histplot(data=iris_df, x='sepal_length', hue='species', kde=True, bins=15)
 plt.title('Phân phối Chiều dài Đài hoa theo Loài')
 plt.xlabel('Chiều dài Đài hoa (cm)')
 plt.ylabel('Tần suất')
 plt.show()</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1 mb-4">Tham số chính: <br><strong>sns.histplot(...)</strong>: data, x, hue, kde, bins, multiple.<br><strong>plt.title</strong>, <strong>plt.xlabel</strong>, <strong>plt.ylabel</strong>.</p>
 
                             <h5 class="font-semibold mt-4 mb-1">5. Pie Chart (Biểu đồ tròn)</h5>
                             <p><strong>Trường hợp sử dụng:</strong> Tỷ lệ đóng góp vào tổng thể (ít hạng mục).</p>
-                            <pre class="code-block"><code>species_counts = iris_df['species'].value_counts()
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-6">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-6" class="language-python">species_counts = iris_df['species'].value_counts()
 plt.figure(figsize=(7, 7))
 colors = sns.color_palette('pastel')[0:len(species_counts)]
 plt.pie(species_counts, labels=species_counts.index, autopct='%1.1f%%', colors=colors)
-plt.title('Tỷ lệ các loài hoa Iris')
+plt.title('Tỷ Lệ các loài hoa Iris')
 plt.axis('equal')
 plt.show()</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1 mb-4">Tham số chính: <br><strong>plt.pie(...)</strong>: x, labels, autopct, colors, explode, shadow.<br><strong>plt.title</strong>, <strong>plt.axis('equal')</strong>.</p>
 
                             <h5 class="font-semibold mt-4 mb-1">6. Box Plot (Biểu đồ hộp)</h5>
                             <p><strong>Trường hợp sử dụng:</strong> So sánh phân phối giữa các nhóm, outliers, độ lệch.</p>
-                            <pre class="code-block"><code>plt.figure(figsize=(8, 6))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-7">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-7" class="language-python">plt.figure(figsize=(8, 6))
 sns.boxplot(x='species', y='petal_width', data=iris_df, palette='Set3')
 plt.title('Phân phối Chiều rộng Cánh hoa theo Loài')
 plt.xlabel('Loài hoa')
 plt.ylabel('Chiều rộng Cánh hoa (cm)')
 plt.show()</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-1 mb-4">Tham số chính: <br><strong>sns.boxplot(...)</strong>: x, y, data, palette, hue.<br><strong>plt.title</strong>, <strong>plt.xlabel</strong>, <strong>plt.ylabel</strong>.</p>
                         </div>
                          <div class="mb-6 p-4 border-l-4 border-indigo-300 bg-indigo-50 rounded mt-8">
@@ -425,8 +477,12 @@ plt.show()</code></pre>
                             <h4 class="text-lg font-medium text-indigo-700">1. Khởi tạo và Khám phá Dataset "Tips"</h4>
                             <p class="mb-4">Chúng ta sẽ sử dụng bộ dữ liệu "Tips" có sẵn trong thư viện Seaborn. Bộ dữ liệu này ghi lại thông tin về tiền boa tại một nhà hàng.</p>
                             
-                            <h5 class="font-semibold mt-3 mb-2">Mã Python:</h5>
-                            <pre class="code-block"><code>import seaborn as sns
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-8">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-8" class="language-python">import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -447,6 +503,7 @@ tips_df.info()
 # Mô tả thống kê cơ bản
 print("\nMô tả thống kê:")
 print(tips_df.describe())</code></pre>
+                            </div>
                             <p class="text-sm text-gray-600 mt-2"><strong>Giải thích:</strong> Đoạn mã trên thực hiện việc nạp thư viện cần thiết, tải bộ dữ liệu "Tips", và hiển thị một vài thông tin cơ bản để hiểu về cấu trúc và nội dung của dữ liệu.</p>
                         </div>
                         
@@ -454,10 +511,12 @@ print(tips_df.describe())</code></pre>
                             <h4 class="text-lg font-medium text-indigo-700">2. Biểu đồ Trống và Tùy chỉnh Cơ bản</h4>
                             <p class="mb-4">Trước khi vẽ các biểu đồ phức tạp, hãy bắt đầu với việc tạo một "khung tranh" (Figure) và một "vùng vẽ" (Axes) trống. Sau đó, chúng ta sẽ thêm các thành phần cơ bản như tiêu đề và nhãn trục.</p>
 
-                            <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python:</h5>
-                                    <pre class="code-block"><code># Tạo một Figure và một Axes
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-9">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-9" class="language-python"># Tạo một Figure và một Axes
 fig, ax = plt.subplots(figsize=(8, 5)) # figsize=(width, height) in inches
 
 # Thêm tiêu đề cho Axes
@@ -476,30 +535,19 @@ ax.grid(True, linestyle='--', alpha=0.7)
 
 # Hiển thị biểu đồ
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Biểu+đồ+Trống+Tùy+chỉnh" alt="Biểu đồ Trống Tùy chỉnh" class="chart-image mx-auto">
-                                </div>
                             </div>
-                            <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
-                                <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
-                                    <li><code>plt.subplots()</code>: Tạo ra một Figure và một hoặc nhiều Axes. <code>figsize</code> điều chỉnh kích thước của Figure.</li>
-                                    <li><code>ax.set_title()</code>, <code>ax.set_xlabel()</code>, <code>ax.set_ylabel()</code>: Đặt tiêu đề và nhãn cho các trục. <code>fontsize</code> điều chỉnh kích thước chữ.</li>
-                                    <li><code>ax.set_xlim()</code>, <code>ax.set_ylim()</code>: Đặt giới hạn hiển thị cho trục X và Y.</li>
-                                    <li><code>ax.grid()</code>: Hiển thị lưới trên biểu đồ. <code>linestyle</code> là kiểu đường, <code>alpha</code> là độ trong suốt.</li>
-                                </ul>
-                            </p>
                         </div>
                         
                         <div id="section-line-chart" class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">3. Biểu đồ Đường (Line Chart)</h4>
                             <p class="mb-4">Biểu đồ đường thường được sử dụng để theo dõi sự thay đổi của một biến liên tục theo thời gian hoặc một chuỗi có thứ tự. Với dataset "Tips", chúng ta có thể xem xét tiền boa trung bình theo số lượng khách.</p>
                             
-                            <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python (Seaborn):</h5>
-                                    <pre class="code-block"><code># Tính tiền boa trung bình theo số lượng khách
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-10">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-10" class="language-python"># Tính tiền boa trung bình theo số lượng khách
 avg_tip_by_size = tips_df.groupby('size')['tip'].mean().reset_index()
 
 plt.figure(figsize=(10, 6))
@@ -512,11 +560,6 @@ plt.xlabel('Số Lượng Khách (Size)', fontsize=12)
 plt.ylabel('Tiền Boa Trung Bình ($)', fontsize=12)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Line+Chart:+Avg+Tip+by+Size" alt="Line Chart: Tiền Boa Trung Bình theo Số Lượng Khách" class="chart-image mx-auto">
-                                </div>
                             </div>
                              <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
                                 <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
@@ -538,42 +581,29 @@ plt.show()</code></pre>
                         <div id="section-bar-chart" class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">4. Biểu đồ Cột (Bar Chart)</h4>
                             <p class="mb-4">Biểu đồ cột dùng để so sánh giá trị giữa các nhóm hoặc hạng mục khác nhau. Ví dụ: so sánh số lượng khách hàng theo từng ngày trong tuần.</p>
-                            <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python (Seaborn):</h5>
-                                    <pre class="code-block"><code>plt.figure(figsize=(10, 6))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-11">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-11" class="language-python">plt.figure(figsize=(10, 6))
 sns.countplot(x='day', data=tips_df, palette='viridis', order=['Thur', 'Fri', 'Sat', 'Sun'])
 plt.title('Số Lượng Khách Hàng theo Ngày trong Tuần', fontsize=16)
 plt.xlabel('Ngày trong Tuần', fontsize=12)
 plt.ylabel('Số Lượng Khách Hàng', fontsize=12)
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Bar+Chart:+Customers+by+Day" alt="Bar Chart: Số Lượng Khách Hàng theo Ngày" class="chart-image mx-auto">
-                                </div>
                             </div>
-                            <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
-                                <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
-                                    <li><code>sns.countplot()</code>: Hàm của Seaborn, rất tiện lợi để vẽ biểu đồ cột đếm tần suất xuất hiện của các giá trị trong một cột phân loại.
-                                        <ul>
-                                            <li><code>x='day'</code>: Cột dữ liệu phân loại để đếm.</li>
-                                            <li><code>data=tips_df</code>: DataFrame chứa dữ liệu.</li>
-                                            <li><code>palette='viridis'</code>: Chọn một bảng màu (color palette) có sẵn của Seaborn.</li>
-                                            <li><code>order=['Thur', 'Fri', 'Sat', 'Sun']</code>: Quy định thứ tự xuất hiện của các cột trên biểu đồ.</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </p>
                         </div>
                         
                         <div id="section-pie-chart" class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">5. Biểu đồ Tròn (Pie Chart)</h4>
                             <p class="mb-4">Biểu đồ tròn hiển thị tỷ lệ phần trăm của các thành phần trong một tổng thể. Thường dùng cho số lượng hạng mục ít. Ví dụ: tỷ lệ khách hàng nam và nữ.</p>
-                             <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python (Matplotlib):</h5>
-                                    <pre class="code-block"><code>gender_counts = tips_df['sex'].value_counts()
+                             <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-12">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-12" class="language-python">gender_counts = tips_df['sex'].value_counts()
 
 plt.figure(figsize=(8, 8))
 plt.pie(gender_counts, 
@@ -586,37 +616,18 @@ plt.pie(gender_counts,
 plt.title('Tỷ Lệ Khách Hàng theo Giới Tính', fontsize=16)
 plt.axis('equal') # Đảm bảo biểu đồ tròn thực sự tròn
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Pie+Chart:+Gender+Distribution" alt="Pie Chart: Tỷ Lệ Khách Hàng theo Giới Tính" class="chart-image mx-auto">
-                                </div>
                             </div>
-                            <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
-                                <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
-                                    <li><code>tips_df['sex'].value_counts()</code>: Đếm số lượng khách hàng cho mỗi giới tính.</li>
-                                    <li><code>plt.pie()</code>: Hàm của Matplotlib để vẽ biểu đồ tròn.
-                                        <ul>
-                                            <li>Tham số đầu tiên: Giá trị (số lượng) cho mỗi lát.</li>
-                                            <li><code>labels</code>: Nhãn cho từng lát cắt.</li>
-                                            <li><code>autopct='%1.1f%%'</code>: Hiển thị tỷ lệ phần trăm trên lát cắt, với 1 chữ số sau dấu phẩy.</li>
-                                            <li><code>startangle=90</code>: Bắt đầu lát cắt đầu tiên từ góc 90 độ (phía trên).</li>
-                                            <li><code>colors</code>: Danh sách màu cho các lát.</li>
-                                            <li><code>explode=(0, 0.05)</code>: "Tách" lát thứ hai (ở đây là 'Female') ra một chút để nhấn mạnh.</li>
-                                        </ul>
-                                    </li>
-                                    <li><code>plt.axis('equal')</code>: Đảm bảo biểu đồ tròn không bị méo.</li>
-                                </ul>
-                            </p>
                         </div>
 
                         <div id="section-histogram" class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">6. Biểu đồ Phân phối (Histogram)</h4>
                             <p class="mb-4">Histogram biểu diễn sự phân phối tần suất của một tập dữ liệu số liên tục. Ví dụ: phân phối của tổng hóa đơn (total_bill).</p>
-                            <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python (Seaborn):</h5>
-                                    <pre class="code-block"><code>plt.figure(figsize=(10, 6))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-13">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-13" class="language-python">plt.figure(figsize=(10, 6))
 sns.histplot(data=tips_df, x='total_bill', bins=20, kde=True, color='salmon')
 # bins: số lượng khoảng (cột)
 # kde=True: vẽ thêm đường ước lượng mật độ Kernel (Kernel Density Estimate)
@@ -625,68 +636,35 @@ plt.title('Phân Phối của Tổng Hóa Đơn', fontsize=16)
 plt.xlabel('Tổng Hóa Đơn ($)', fontsize=12)
 plt.ylabel('Tần Suất', fontsize=12)
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Histogram:+Total+Bill+Distribution" alt="Histogram: Phân Phối Tổng Hóa Đơn" class="chart-image mx-auto">
-                                </div>
                             </div>
-                            <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
-                                <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
-                                    <li><code>sns.histplot()</code>: Hàm của Seaborn để vẽ histogram.
-                                        <ul>
-                                            <li><code>data=tips_df</code>: DataFrame chứa dữ liệu.</li>
-                                            <li><code>x='total_bill'</code>: Cột dữ liệu số cần vẽ histogram.</li>
-                                            <li><code>bins=20</code>: Chia dữ liệu thành 20 khoảng (cột). Số lượng `bins` ảnh hưởng đến hình dạng của histogram.</li>
-                                            <li><code>kde=True</code>: Vẽ thêm một đường Kernel Density Estimate (KDE) để làm mịn và thể hiện hình dạng phân phối một cách liên tục.</li>
-                                            <li><code>color</code>: Màu của các cột histogram.</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </p>
                         </div>
 
                         <div id="section-boxplot" class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">7. Biểu đồ Hộp (Box Plot)</h4>
                             <p class="mb-4">Box plot hiển thị sự phân phối của dữ liệu số dựa trên các giá trị tóm tắt (min, Q1, median, Q3, max) và các điểm ngoại lai. Rất hữu ích để so sánh phân phối giữa các nhóm. Ví dụ: so sánh phân phối tiền boa theo từng ngày trong tuần.</p>
-                            <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python (Seaborn):</h5>
-                                    <pre class="code-block"><code>plt.figure(figsize=(12, 7))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-14">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-14" class="language-python">plt.figure(figsize=(12, 7))
 sns.boxplot(x='day', y='tip', data=tips_df, palette='pastel', order=['Thur', 'Fri', 'Sat', 'Sun'])
 plt.title('Phân Phối Tiền Boa theo Ngày trong Tuần', fontsize=16)
 plt.xlabel('Ngày trong Tuần', fontsize=12)
 plt.ylabel('Tiền Boa ($)', fontsize=12)
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Box+Plot:+Tip+Distribution+by+Day" alt="Box Plot: Phân Phối Tiền Boa theo Ngày" class="chart-image mx-auto">
-                                </div>
                             </div>
-                            <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
-                                <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
-                                    <li><code>sns.boxplot()</code>: Hàm của Seaborn để vẽ box plot.
-                                        <ul>
-                                            <li><code>x='day'</code>: Biến phân loại cho trục hoành (các nhóm để so sánh).</li>
-                                            <li><code>y='tip'</code>: Biến số có phân phối cần được hiển thị trên trục tung.</li>
-                                            <li><code>data=tips_df</code>: DataFrame chứa dữ liệu.</li>
-                                            <li><code>palette='pastel'</code>: Chọn bảng màu.</li>
-                                            <li><code>order</code>: Thứ tự các hộp trên biểu đồ.</li>
-                                        </ul>
-                                    </li>
-                                    <li>Mỗi "hộp" hiển thị: đường giữa là median (Q2), đáy hộp là Q1, đỉnh hộp là Q3. "Râu" (whiskers) kéo dài đến các điểm không phải ngoại lai. Các điểm riêng lẻ là ngoại lai.</li>
-                                </ul>
-                            </p>
                         </div>
 
                         <div id="section-scatter-plot" class="mb-6 p-4 border-l-4 border-indigo-500 bg-indigo-50 rounded">
                             <h4 class="text-lg font-medium text-indigo-700">8. Biểu đồ Tán Xạ (Scatter Plot)</h4>
                             <p class="mb-4">Biểu đồ tán xạ hiển thị mối quan hệ giữa hai biến số. Mỗi điểm trên biểu đồ đại diện cho một cặp giá trị. Ví dụ: mối quan hệ giữa tổng hóa đơn và tiền boa.</p>
-                            <div class="chart-demo-grid">
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Mã Python (Seaborn):</h5>
-                                    <pre class="code-block"><code>plt.figure(figsize=(10, 6))
+                            <div class="code-block-container">
+                                <div class="code-block-header">
+                                    <span>Python Code</span>
+                                    <button class="copy-btn" data-clipboard-target="#code-15">Copy</button>
+                                </div>
+                                <pre class="code-block active"><code id="code-15" class="language-python">plt.figure(figsize=(10, 6))
 sns.scatterplot(x='total_bill', y='tip', data=tips_df, 
                 hue='smoker', style='time', size='size', 
                 palette='coolwarm', alpha=0.7)
@@ -699,28 +677,7 @@ plt.xlabel('Tổng Hóa Đơn ($)', fontsize=12)
 plt.ylabel('Tiền Boa ($)', fontsize=12)
 plt.legend(title='Chú giải')
 plt.show()</code></pre>
-                                </div>
-                                <div>
-                                    <h5 class="font-semibold mt-3 mb-2">Hình ảnh minh họa:</h5>
-                                    <img src="https://placehold.co/600x400/E2E8F0/4A5568?text=Scatter+Plot:+Total+Bill+vs+Tip" alt="Scatter Plot: Tổng Hóa Đơn và Tiền Boa" class="chart-image mx-auto">
-                                </div>
                             </div>
-                            <p class="text-sm text-gray-600 mt-4"><strong>Giải thích:</strong>
-                                <ul class="list-disc list-inside ml-4 text-sm text-gray-600">
-                                    <li><code>sns.scatterplot()</code>: Hàm của Seaborn để vẽ biểu đồ tán xạ.
-                                        <ul>
-                                            <li><code>x='total_bill'</code>, <code>y='tip'</code>: Các biến số cho hai trục.</li>
-                                            <li><code>data=tips_df</code>: DataFrame.</li>
-                                            <li><code>hue='smoker'</code>: Tô màu các điểm dựa trên giá trị của cột 'smoker'.</li>
-                                            <li><code>style='time'</code>: Thay đổi hình dạng của điểm đánh dấu (marker) dựa trên giá trị của cột 'time'.</li>
-                                            <li><code>size='size'</code>: Thay đổi kích thước của điểm dựa trên giá trị của cột 'size'.</li>
-                                            <li><code>palette='coolwarm'</code>: Bảng màu cho `hue`.</li>
-                                            <li><code>alpha=0.7</code>: Độ trong suốt của các điểm, hữu ích khi có nhiều điểm chồng chéo.</li>
-                                        </ul>
-                                    </li>
-                                    <li><code>plt.legend(title='Chú giải')</code>: Hiển thị chú giải cho các biến `hue`, `style`, `size`.</li>
-                                </ul>
-                            </p>
                         </div>
                         
                         <div class="mb-6 p-4 border-l-4 border-indigo-300 bg-indigo-50 rounded mt-8">
@@ -821,42 +778,19 @@ plt.show()</code></pre>
             });
         });
         
-        // Collapsible code blocks functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get all code blocks
-            const codeBlocks = document.querySelectorAll('pre.code-block');
-            
-            // Process each code block to add header and apply syntax highlighting
-            codeBlocks.forEach((block, index) => {
-                // Get the code content
-                const code = block.querySelector('code').innerText;
-                
-                // Create a header element
-                const header = document.createElement('div');
-                header.className = 'code-block-header';
-                header.innerHTML = `<span>Python Code</span><span>▼</span>`;
-                
-                // Insert the header before the code block
-                block.parentNode.insertBefore(header, block);
-                
-                // Add click event to toggle code visibility
-                header.addEventListener('click', function() {
-                    block.classList.toggle('active');
-                    this.querySelector('span:last-child').textContent = 
-                        block.classList.contains('active') ? '▲' : '▼';
-                });
-                
-                // Apply simple syntax highlighting
-                const codeElement = block.querySelector('code');
-                if (codeElement) {
-                    let highlightedCode = code
-                        .replace(/(["'])(.*?)\1/g, '<span class="code-string">$&</span>') // Strings
-                        .replace(/\b(import|from|def|class|if|elif|else|for|while|return|with|as|try|except|finally|continue|break|print|in|and|or|not|is|None|True|False)\b/g, '<span class="code-keyword">$&</span>') // Keywords
-                        .replace(/\b(plt|sns|pd|np)\.([\w]+)(?=\()/g, '<span class="code-variable">$1</span>.<span class="code-function">$2</span>') // Matplotlib/Seaborn/Pandas/NumPy functions
-                        .replace(/^([ \t]*)(#.*)$/gm, '$1<span class="code-comment">$2</span>') // Comments
-                        .replace(/\b(\d+(\.\d+)?)\b/g, '<span class="code-number">$&</span>'); // Numbers
-                    
-                    codeElement.innerHTML = highlightedCode;
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const codeId = btn.getAttribute('data-clipboard-target');
+                const code = document.querySelector(codeId);
+                if (code) {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = code.innerText;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    btn.textContent = 'Đã copy!';
+                    setTimeout(() => btn.textContent = 'Copy', 1500);
                 }
             });
         });
